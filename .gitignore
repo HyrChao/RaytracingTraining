@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+/RaytracingTraining.vcxproj.user
+/RaytracingTraining.vcxproj.filters
+/RaytracingTraining.vcxproj
+/Output.ppm
+
+/intermediate
+/bin
+/.vs
