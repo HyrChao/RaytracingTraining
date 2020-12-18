@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 
+#include "color.h"
+#include "vector3.h"
+
 static int screenWidth = 256;
 static int screenHeight = 256;
 
@@ -14,21 +17,20 @@ int main()
 
 	for (int v = screenHeight; v > 0; v--)
 	{
-		std::cerr << "\rScanlines remaining: " << v << ' ' << std::flush;
+		// Progress indicator
+		std::cout << "\rScanlines remaining: " << v << ' ' << std::flush;
 		for (int u = 0; u<screenWidth ; u++)
 		{
 			double r = double(u) / (screenWidth - 1);
 			double g = double(v) / (screenHeight - 1);
 			double b = 0.25;
-
-			int nr = static_cast<int>(r * 255.99);
-			int ng = static_cast<int>(g * 255.99);
-			int nb = static_cast<int>(b * 255.99);
-
-			file << nr << " " << ng << " " << nb << "\n";
+			color pixelColor = color(r, g, b);
+			
+			write_color(file, pixelColor);
 		}
 	}
-	std::cerr << "\nDone.\n";
+	std::cout << "\nDone.\n";
 	file.close();
+	std::cout << "Opening output file, please wait...";
 	system("Output.ppm");
 }
